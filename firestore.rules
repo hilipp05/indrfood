@@ -1,0 +1,152 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─────────────────────────────────────────────
+    // Helper functions
+    // ─────────────────────────────────────────────
+
+    // Cek apakah request berasal dari user yang sudah login
+    function isLoggedIn() {
+      return request.auth != null;
+    }
+
+    // Cek apakah user yang login adalah admin
+    // (baca dokumen users/{uid} dan cek field role)
+    function isAdmin() {
+      return isLoggedIn() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Cek apakah user yang login adalah pemilik dokumen
+    function isOwner(uid) {
+      return isLoggedIn() && request.auth.uid == uid;
+    }
+
+
+    // ─────────────────────────────────────────────
+    // Koleksi: users
+    // ─────────────────────────────────────────────
+    match /users/{uid} {
+      // Pelanggan bisa baca & update profil sendiri saja
+      allow read:   if isOwner(uid) || isAdmin();
+      allow create: if isOwner(uid)
+                    && request.resource.data.role == 'pelanggan'; // tidak boleh daftar sebagai admin
+      allow update: if isOwner(uid)
+                    && !('role' in request.resource.data.diff(resource.data).affectedKeys()); // tidak boleh ubah role sendiri
+      allow delete: if isAdmin();
+    }
+
+
+    // ─────────────────────────────────────────────
+    // Koleksi: menu
+    // ─────────────────────────────────────────────
+    match /menu/{menuId} {
+      // Siapa pun (termasuk tamu) bisa baca menu (untuk landing page)
+      allow read:   if true;
+      // Hanya admin yang boleh CRUD
+      allow create,
+            update,
+            delete: if isAdmin();
+    }
+
+
+    // ─────────────────────────────────────────────
+    // Koleksi: kategori
+    // ─────────────────────────────────────────────
+    match /kategori/{katId} {
+      allow read:   if true;
+      allow create,
+            update,
+            delete: if isAdmin();
+    }
+
+
+    // ─────────────────────────────────────────────
+    // Koleksi: pesanan
+    // ─────────────────────────────────────────────
+    match /pesanan/{pesananId} {
+      // Pelanggan hanya bisa baca pesanannya sendiri
+      allow read: if isAdmin()
+               || (isLoggedIn() && resource.data.pelangganId == request.auth.uid);
+
+      // Pelanggan membuat pesanan untuk dirinya sendiri
+      allow create: if isLoggedIn()
+                    && request.resource.data.pelangganId == request.auth.uid
+                    && request.resource.data.status == 'Baru'; // status awal harus Baru
+
+      // Pelanggan hanya boleh update field tertentu (ajukan batal)
+      // Admin boleh update semua field
+      allow update: if isAdmin()
+                 || (isLoggedIn()
+                     && resource.data.pelangganId == request.auth.uid
+                     && request.resource.data.diff(resource.data).affectedKeys()
+                        .hasOnly(['status', 'alasanBatal'])
+                     && request.resource.data.status == 'Pengajuan Batal');
+
+      allow delete: if isAdmin();
+    }
+
+
+    // ─────────────────────────────────────────────
+    // Koleksi: ulasan
+    // ─────────────────────────────────────────────
+    match /ulasan/{ulasanId} {
+      // Semua orang (termasuk tamu) bisa baca ulasan
+      allow read: if true;
+
+      // Pelanggan yang login boleh buat ulasan untuk pesanannya sendiri
+      allow create: if isLoggedIn()
+                    && request.resource.data.pelangganId == request.auth.uid;
+
+      // Tidak ada yang boleh edit ulasan setelah dibuat
+      allow update: if false;
+
+      // Hanya admin yang boleh hapus
+      allow delete: if isAdmin();
+    }
+
+
+    // ─────────────────────────────────────────────
+    // Koleksi: laporan
+    // ─────────────────────────────────────────────
+    match /laporan/{laporanId} {
+      // Hanya admin yang bisa akses laporan
+      allow read,
+            create,
+            update,
+            delete: if isAdmin();
+    }
+
+
+    // ─────────────────────────────────────────────
+    // Koleksi: pengaturan
+    // Sub-dokumen: toko, profil
+    // ─────────────────────────────────────────────
+    match /pengaturan/{docId} {
+      // Semua user yang login boleh baca (untuk status toko, jam operasional)
+      // Tamu juga perlu baca status toko di landing page
+      allow read: if true;
+
+      // Hanya admin yang boleh update pengaturan
+      allow create,
+            update,
+            delete: if isAdmin();
+    }
+
+
+    // ─────────────────────────────────────────────
+    // Koleksi: notifikasi (jika ada di masa depan)
+    // ─────────────────────────────────────────────
+    match /notifikasi/{notifId} {
+      allow read:   if isAdmin()
+                 || (isLoggedIn() && resource.data.userId == request.auth.uid);
+      allow create: if isAdmin();
+      allow update: if isLoggedIn() && resource.data.userId == request.auth.uid;
+      allow delete: if isAdmin()
+                 || (isLoggedIn() && resource.data.userId == request.auth.uid);
+    }
+
+  }
+}

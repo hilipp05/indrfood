@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/*
+  IndriFood design system
+  Identitas: restoran & catering rumahan. Krem hangat sebagai dasar,
+  tinta cokelat gelap untuk teks, satu aksen terakota (warna sambal/bata)
+  untuk aksi utama. Hijau/merah/kuning hanya untuk status (sukses/bahaya/peringatan).
+*/
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  /* Aksen: terakota */
+  --color-brand-50:  #FDF4EE;
+  --color-brand-100: #FAE4D5;
+  --color-brand-200: #F2C7A9;
+  --color-brand-300: #E8A173;
+  --color-brand-400: #D97C48;
+  --color-brand-500: #C85F2A;
+  --color-brand-600: #B3401C;
+  --color-brand-700: #94341A;
+  --color-brand-800: #762C1A;
+  --color-brand-900: #5E2619;
+  --color-brand-950: #33120B;
+
+  /* Netral hangat (pengganti gray/slate) */
+  --color-ink-50:  #FAF7F2;
+  --color-ink-100: #F3EEE6;
+  --color-ink-200: #E7DFD3;
+  --color-ink-300: #D3C8B8;
+  --color-ink-400: #8B7F6F;
+  --color-ink-500: #6F6455;
+  --color-ink-600: #564C40;
+  --color-ink-700: #40382F;
+  --color-ink-800: #2B251F;
+  --color-ink-900: #1C1814;
+  --color-ink-950: #110E0B;
+
+  /* Radius: lebih rapat, hierarki jelas (input/kartu/modal) */
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.625rem;
+  --radius-2xl: 0.875rem;
+  --radius-3xl: 1.25rem;
+
+  /* Bayangan: lembut & netral, hanya penanda elevasi */
+  --shadow-sm: 0 1px 2px rgb(28 24 20 / 0.06);
+  --shadow-md: 0 2px 8px rgb(28 24 20 / 0.08);
+  --shadow-lg: 0 8px 24px rgb(28 24 20 / 0.10);
+  --shadow-xl: 0 16px 40px rgb(28 24 20 / 0.12);
+  --shadow-2xl: 0 24px 56px rgb(28 24 20 / 0.16);
+}
+
+:root {
+  --background: #FAF7F2;
+  --foreground: #1C1814;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Judul memakai serif hangat; angka & UI tetap sans agar terbaca */
+h1, h2, h3 {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+::selection { background: var(--color-brand-200); color: var(--color-ink-900); }
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 2px;
+}
+
+/* Hormati preferensi pengguna: matikan animasi dekoratif */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

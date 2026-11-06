@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // ─────────────────────────────────────────────
+    // Foto menu — hanya admin yang bisa upload/hapus
+    // Semua orang bisa baca (untuk tampilan menu publik)
+    // ─────────────────────────────────────────────
+    match /menu/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin'
+                   && request.resource.size < 2 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+      allow delete: if request.auth != null
+                    && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ─────────────────────────────────────────────
+    // Foto profil — pelanggan hanya bisa upload/hapus foto miliknya sendiri
+    // Format file: profil/{uid}_{timestamp}
+    // ─────────────────────────────────────────────
+    match /profil/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+                   && fileName.matches(request.auth.uid + '_.*')
+                   && request.resource.size < 1 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+      allow delete: if request.auth != null
+                    && fileName.matches(request.auth.uid + '_.*');
+    }
+
+  }
+}

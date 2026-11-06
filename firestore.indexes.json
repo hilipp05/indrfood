@@ -1,0 +1,36 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "pesanan",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "pelangganId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt",   "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "pesanan",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status",    "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "laporan",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "selesaiAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "ulasan",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "menuNama", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
