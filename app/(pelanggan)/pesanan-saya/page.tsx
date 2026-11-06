@@ -429,7 +429,7 @@ export default function PesananSayaPage() {
                   )}
 
                   {/* Pesan Lagi — tampil di semua status selesai/dibatalkan */}
-                  {(p.status === 'Selesai' || p.status === 'Dibatalkan') && (
+                  {(['Selesai', 'Dibatalkan'] as const).includes(p.status) && (
                     <button
                       onClick={() => handlePesanLagi(p)}
                       className="w-full py-2.5 rounded-xl text-sm font-bold text-ink-700 bg-ink-50 hover:bg-ink-100 transition-colors border border-ink-200 flex items-center justify-center gap-2"
