@@ -82,8 +82,8 @@ export default function NotFound() {
 
         {/* Branding */}
         <div className="mt-10 flex items-center justify-center gap-2 opacity-40">
-          <div className="w-6 h-6 bg-gradient-to-br from-brand-600 to-brand-500 rounded-lg flex items-center justify-center">
-            <span className="text-white text-[9px] font-black">IF</span>
+          <div className="w-6 h-6 rounded-lg overflow-hidden">
+            <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
           </div>
           <span className="text-xs font-bold text-ink-500">IndriFood</span>
         </div>

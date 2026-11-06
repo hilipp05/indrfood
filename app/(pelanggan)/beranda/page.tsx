@@ -448,8 +448,8 @@
             {/* Brand */}
             <div className="col-span-2 sm:col-span-1 space-y-3">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-brand-600 to-brand-500 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="text-white text-[10px] font-black">IF</span>
+                <div className="w-8 h-8 rounded-lg overflow-hidden shrink-0">
+                  <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
                 </div>
                 <span className="font-extrabold text-ink-900 text-base">IndriFood</span>
               </div>

@@ -74,8 +74,8 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
           <Link href="/beranda" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 bg-gradient-to-br from-brand-600 to-brand-500 rounded-xl flex items-center justify-center shadow-md group-hover: transition-shadow">
-              <span className="text-white text-xs font-black">IF</span>
+            <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md group-hover:shadow-lg transition-shadow flex-shrink-0">
+              <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
             </div>
             <div>
               <span className="font-extrabold text-ink-900 text-base leading-none">IndriFood</span>
@@ -225,8 +225,8 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
           <p className="text-xs text-ink-400">© 2025 IndriFood. All rights reserved.</p>
           <div className="flex items-center gap-1.5">
-            <div className="w-5 h-5 bg-gradient-to-br from-brand-600 to-brand-500 rounded-md flex items-center justify-center">
-              <span className="text-white text-[8px] font-black">IF</span>
+            <div className="w-5 h-5 rounded-md overflow-hidden flex-shrink-0">
+              <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
             </div>
             <span className="text-xs font-bold text-ink-500">IndriFood</span>
           </div>

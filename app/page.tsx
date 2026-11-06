@@ -35,8 +35,8 @@ export default function Home() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-brand-500 rounded-xl flex items-center justify-center shadow-md">
-            <span className="text-white text-sm font-black">IF</span>
+          <div className="w-10 h-10 rounded-xl overflow-hidden shadow-md">
+            <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
           </div>
           <div className="w-5 h-5 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" />
         </div>
@@ -52,8 +52,8 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-5 py-3 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-gradient-to-br from-brand-600 to-brand-500 rounded-xl flex items-center justify-center shadow-md shrink-0">
-              <span className="text-white text-xs font-black">IF</span>
+            <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shrink-0">
+              <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
             </div>
             <div>
               <span className="font-extrabold text-ink-900 text-base leading-none">IndriFood</span>
@@ -489,8 +489,8 @@ export default function Home() {
             {/* Brand */}
             <div className="col-span-2 sm:col-span-1 space-y-3">
               <div className="flex items-center gap-2">
-                <div className="w-9 h-9 bg-gradient-to-br from-brand-600 to-brand-500 rounded-xl flex items-center justify-center shadow-md shrink-0">
-                  <span className="text-white text-xs font-black">IF</span>
+                <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md shrink-0">
+                  <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <span className="font-extrabold text-ink-900 text-base leading-none">IndriFood</span>

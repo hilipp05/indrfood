@@ -89,8 +89,8 @@ export default function LoginPage() {
         <div className="absolute top-1/2 right-8 w-32 h-32 bg-white/5 rounded-full" />
 
         <div className="relative z-10 text-center">
-          <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
-            <span className="text-white text-3xl font-black">IF</span>
+          <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl overflow-hidden">
+            <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-4xl font-extrabold text-white mb-3">IndriFood</h1>
           <p className="text-brand-100 text-lg mb-8">Restoran & Catering</p>
@@ -117,8 +117,8 @@ export default function LoginPage() {
           {/* Mobile: logo + back */}
           <div className="lg:hidden flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-brand-500 rounded-xl flex items-center justify-center shadow-md">
-                <span className="text-white text-sm font-black">IF</span>
+              <div className="w-10 h-10 rounded-xl overflow-hidden shadow-md">
+                <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
               </div>
               <div>
                 <p className="font-extrabold text-ink-900 text-base leading-none">IndriFood</p>

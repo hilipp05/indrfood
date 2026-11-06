@@ -47,8 +47,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return (
       <div className="min-h-screen flex items-center justify-center bg-ink-950">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-brand-500 rounded-xl flex items-center justify-center shadow-lg">
-            <span className="text-white text-sm font-black">IF</span>
+          <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg flex-shrink-0">
+            <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
           </div>
           <div className="w-6 h-6 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" />
         </div>
@@ -61,8 +61,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Logo */}
       <div className="px-5 py-5 border-b border-ink-800">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-brand-500 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
-            <span className="text-white text-sm font-black">IF</span>
+          <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg flex-shrink-0">
+            <img src="/logo.png" alt="IndriFood" className="w-full h-full object-cover" />
           </div>
           <div>
             <p className="font-extrabold text-white text-sm leading-tight">IndriFood</p>
