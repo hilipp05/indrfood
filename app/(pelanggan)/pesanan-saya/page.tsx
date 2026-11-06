@@ -19,7 +19,7 @@ type Pesanan = {
   pelangganEmail: string;
   items: ItemPesanan[];
   total: number;
-  status: string;
+  status: 'Baru' | 'Diproses' | 'Dikirim' | 'Selesai' | 'Dibatalkan' | 'Pengajuan Batal';
   tipeOrder?: 'dine-in' | 'delivery';
   metodeBayar?: 'tunai' | 'kredit' | 'transfer';
   transferDikonfirmasi?: boolean;
@@ -429,7 +429,7 @@ export default function PesananSayaPage() {
                   )}
 
                   {/* Pesan Lagi — tampil di semua status selesai/dibatalkan */}
-                  {(p.status === 'Selesai' || (p.status as string) === 'Dibatalkan') && (
+                  {(p.status === 'Selesai' || p.status === 'Dibatalkan') && (
                     <button
                       onClick={() => handlePesanLagi(p)}
                       className="w-full py-2.5 rounded-xl text-sm font-bold text-ink-700 bg-ink-50 hover:bg-ink-100 transition-colors border border-ink-200 flex items-center justify-center gap-2"
